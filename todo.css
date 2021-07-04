@@ -1,0 +1,23 @@
+.completed {
+    background-color: #ccc;
+}
+
+button {
+    margin: 2px;
+}
+
+.todo-col {
+    width: 400px;
+}
+
+.period-col {
+    width: 200px;
+}
+
+.period {
+    width: 220px;
+}
+
+.new-todo {
+    width: 500px;
+}

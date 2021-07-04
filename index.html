@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>futa4095さんのTodoアプリ</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css">
+  <link rel="stylesheet" href="todo.css">
+</head>
+
+<body>
+  <h1>Todoアプリです</h1>
+  <div id="todo-app">
+    <div class="new-todo">
+      <label for="todo">Todo</label>
+      <input placeholder="ここにTodoを入力してください！" v-model="newTodo" id="todo" maxlength="50">
+      <label for="period">期限</label>
+      <input type="datetime-local" v-model="newPeriod" class="period" id="period">
+      <button class="button" @click="create" :disabled="isAddButtonDisabled">追加</button>
+    </div>
+    <hr>
+    <table>
+      <thead>
+        <tr>
+          <th class="todo-col">Todo</th>
+          <th class="period-col">期限</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="todo in todos" :key="todo.id" :class="{completed: todo.completed}">
+          <template v-if="todo.editing">
+            <td>
+              <input v-model="todo.text">
+            </td>
+            <td>
+              <input type="datetime-local" v-model="todo.period" maxlength="50">
+            </td>
+            <td>
+              <button @click="update(todo.id)" :disabled="todo.text.length === 0">保存</button>
+            </td>
+          </template>
+          <template v-else>
+            <td>
+              <input type="checkbox" v-model="todo.completed">
+              {{ todo.text }}
+            </td>
+            <td>
+              {{ todo.period }}
+            </td>
+            <td>
+              <button class="button button-outline" @click="edit(todo.id)">編集</button>
+              <button class="button button-outline" @click="deleteItem(todo.id)">削除</button>
+            </td>
+          </template>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="todo.js"></script>
+</body>
+
+</html>
